@@ -1,1102 +1,941 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeGlitch | Premium Multimedia Solutions - The Gambia</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #00d4ff;
-            --secondary: #7b2cbf;
-            --accent: #ff006e;
-            --dark: #0a0a0f;
-            --darker: #050508;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.7;
-            color: var(--light);
-            background: var(--dark);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            padding: 15px 0;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding-top: 80px;
-            background: radial-gradient(ellipse at top, rgba(123, 44, 191, 0.15), transparent 60%),
-                        radial-gradient(ellipse at bottom, rgba(0, 212, 255, 0.1), transparent 60%);
-        }
-
-        .hero-content {
-            max-width: 900px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--primary);
-            margin-bottom: 25px;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .hero-badge .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            letter-spacing: -2px;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 40px;
-            max-width: 650px;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            animation: fadeInUp 0.8s ease 0.6s both;
-        }
-
-        .btn {
-            padding: 16px 36px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--light);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--light);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Animated Background */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.5;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            top: 10%;
-            right: 10%;
-        }
-
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            top: 50%;
-            right: 20%;
-            animation-delay: 2s;
-        }
-
-        .shape-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--accent);
-            bottom: 10%;
-            right: 15%;
-            animation-delay: 4s;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 120px 0;
-            background: var(--darker);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-label {
-            display: inline-block;
-            background: rgba(123, 44, 191, 0.1);
-            border: 1px solid rgba(123, 44, 191, 0.3);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            color: var(--secondary);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -1px;
-        }
-
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.6);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 40px;
-            border-radius: 20px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(0, 212, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-        }
-
-        .service-card:hover::before {
-            opacity: 1;
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(123, 44, 191, 0.1));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 25px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--light);
-        }
-
-        .service-card p {
-            color: rgba(255, 255, 255, 0.6);
-            line-height: 1.8;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 80px 0;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(123, 44, 191, 0.05));
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 40px;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
-
-        .stat-item p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* About Section */
-        .about {
-            padding: 120px 0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            letter-spacing: -1px;
-        }
-
-        .about-text p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.9;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .about-feature {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .about-feature .check {
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .about-visual {
-            position: relative;
-        }
-
-        .about-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
-            animation: rotate 20s linear infinite;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .tech-badge {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 120px 0;
-            background: var(--darker);
-        }
-
-        .contact-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 30px;
-            padding: 60px;
-            margin-top: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-        }
-
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .contact-method {
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .contact-method:hover {
-            border-color: rgba(0, 212, 255, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .contact-method .icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .contact-method h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--light);
-        }
-
-        .contact-method p {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.95rem;
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 0 40px;
-            background: var(--darker);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 50px;
-        }
-
-        .footer-brand p {
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 20px;
-            line-height: 1.8;
-        }
-
-        .footer-links h4 {
-            font-size: 1rem;
-            margin-bottom: 20px;
-            color: var(--light);
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-bottom p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-30px) rotate(10deg); }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .container {
-                padding: 0 30px;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 50px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                text-align: center;
-                padding-top: 120px;
-            }
-
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-                flex-direction: column;
-            }
-
-            .hero-bg {
-                display: none;
-            }
-
-            .section-title {
-                font-size: 2.2rem;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-methods {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 20px;
-                text-align: center;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeGlitch – 3-Month Multimedia Training | Enrol Now</title>
+  <meta name="description" content="Join BeGlitch's first multimedia training batch. Learn graphic design, video editing, and creative skills in 3 months. Starts 1st September 2026. Enrol now." />
+
+  <!-- Google Fonts: Montserrat (note: you mentioned "monsterat" - assuming Montserrat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==================== */
+    /* CSS VARIABLES        */
+    /* ==================== */
+    :root {
+      --color-bg-dark: #181818;
+      --color-bg-secondary: #323232;
+      --color-text-light: #ffe7d0;
+      --color-accent: #fc6e20;
+      --font-main: 'Montserrat', sans-serif;
+    }
+
+    /* ==================== */
+    /* RESET & BASE         */
+    /* ==================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ==================== */
+    /* TYPOGRAPHY           */
+    /* ==================== */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+    p { margin-bottom: 1rem; }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.75rem; }
+      h3 { font-size: 1.25rem; }
+    }
+
+    /* ==================== */
+    /* LAYOUT UTILITIES     */
+    /* ==================== */
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 3rem 0;
+      }
+    }
+
+    .text-center { text-align: center; }
+    .text-accent { color: var(--color-accent); }
+
+    /* ==================== */
+    /* BUTTONS              */
+    /* ==================== */
+    .btn {
+      display: inline-block;
+      background-color: var(--color-accent);
+      color: var(--color-bg-dark);
+      font-weight: 700;
+      padding: 0.9rem 2rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(252, 110, 32, 0.4);
+    }
+
+    .btn-large {
+      padding: 1.1rem 2.5rem;
+      font-size: 1.1rem;
+    }
+
+    /* ==================== */
+    /* HEADER               */
+    /* ==================== */
+    header {
+      background-color: var(--color-bg-dark);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--color-bg-secondary);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-text-light);
+    }
+
+    .logo span {
+      color: var(--color-accent);
+    }
+
+    .header-cta {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .header-cta {
+        display: block;
+      }
+    }
+
+    /* ==================== */
+    /* HERO SECTION         */
+    /* ==================== */
+    .hero {
+      background-color: var(--color-bg-dark);
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-tagline {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.95;
+    }
+
+    .hero-note {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      opacity: 0.8;
+    }
+
+    /* ==================== */
+    /* QUICK BENEFITS       */
+    /* ==================== */
+    .quick-benefits {
+      background-color: var(--color-bg-secondary);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .benefits-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .benefit-card {
+      text-align: center;
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    /* ==================== */
+    /* WHAT YOU'LL LEARN    */
+    /* ==================== */
+    .what-you-learn {
+      background-color: var(--color-bg-dark);
+    }
+
+    .learn-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 600px) {
+      .learn-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .learn-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .learn-card {
+      background-color: var(--color-bg-secondary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--color-accent);
+    }
+
+    .learn-card h3 {
+      color: var(--color-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ==================== */
+    /* CREDIBILITY          */
+    /* ==================== */
+    .credibility {
+      background-color: var(--color-bg-secondary);
+    }
+
+    .credibility-list {
+      max-width: 700px;
+      margin: 2rem auto 0;
+    }
+
+    .credibility-list li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .credibility-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+    }
+
+    /* ==================== */
+    /* REQUIREMENTS         */
+    /* ==================== */
+    .requirements {
+      background-color: var(--color-bg-dark);
+    }
+
+    .requirements-list {
+      max-width: 700px;
+      margin: 2rem auto 0;
+    }
+
+    .requirements-list li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .requirements-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--color-accent);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .requirements-note {
+      max-width: 700px;
+      margin: 1.5rem auto 0;
+      text-align: center;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* ==================== */
+    /* SCHEDULE & PRICING   */
+    /* ==================== */
+    .schedule-pricing {
+      background-color: var(--color-bg-secondary);
+    }
+
+    .sp-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .sp-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .sp-card {
+      background-color: var(--color-bg-dark);
+      padding: 2rem;
+      border-radius: 8px;
+    }
+
+    .sp-card h3 {
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    .sp-card ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .sp-note {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    /* ==================== */
+    /* ENROLMENT FORM       */
+    /* ==================== */
+    .enrolment {
+      background-color: var(--color-bg-dark);
+    }
+
+    .form-container {
+      max-width: 650px;
+      margin: 2rem auto 0;
+      background-color: var(--color-bg-secondary);
+      padding: 2.5rem 2rem;
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.85rem;
+      background-color: var(--color-bg-dark);
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: var(--color-text-light);
+      font-family: var(--font-main);
+      font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .checkbox-group input {
+      width: auto;
+      margin-top: 0.25rem;
+    }
+
+    .checkbox-group label {
+      margin-bottom: 0;
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .form-note {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .success-message {
+      display: none;
+      background-color: #1a472a;
+      color: #d4edda;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    /* ==================== */
+    /* FAQ                  */
+    /* ==================== */
+    .faq {
+      background-color: var(--color-bg-secondary);
+    }
+
+    .faq-list {
+      max-width: 800px;
+      margin: 2rem auto 0;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--color-accent);
+    }
+
+    /* ==================== */
+    /* FINAL CTA            */
+    /* ==================== */
+    .final-cta {
+      background-color: var(--color-bg-dark);
+      text-align: center;
+    }
+
+    .final-cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ==================== */
+    /* FOOTER               */
+    /* ==================== */
+    footer {
+      background-color: var(--color-bg-secondary);
+      padding: 3rem 0 2rem;
+      border-top: 1px solid #444;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .footer-brand h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-contact p {
+      margin-bottom: 0.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      display: inline-block;
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-light);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      background-color: var(--color-accent);
+      color: var(--color-bg-dark);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #444;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* ==================== */
+    /* STICKY MOBILE CTA    */
+    /* ==================== */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--color-bg-secondary);
+      padding: 1rem;
+      text-align: center;
+      z-index: 999;
+      display: block;
+      border-top: 1px solid #444;
+    }
+
+    .sticky-cta .btn {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    @media (min-width: 768px) {
+      .sticky-cta {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="container nav-content">
-            <div class="nav-logo">BeGlitch</div>
-            <ul class="nav-links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+
+  <!-- ==================== -->
+  <!-- HEADER               -->
+  <!-- ==================== -->
+  <header>
+    <div class="container header-content">
+      <div class="logo">Be<span>Glitch</span></div>
+      <a href="#enrolment" class="btn header-cta">Enrol Now</a>
+    </div>
+  </header>
+
+  <!-- ==================== -->
+  <!-- HERO                 -->
+  <!-- ==================== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="logo" style="margin-bottom: 0.5rem;">Be<span>Glitch</span></div>
+      <p class="hero-tagline">Visuals beyond reality</p>
+      <h1>3 Months to a Creative Career in The Gambia</h1>
+      <p class="hero-subtitle">Graphic design. Video editing. Real skills. First batch starts 1st September 2026.</p>
+      <a href="#enrolment" class="btn btn-large">Enrol Now – D4,000 (50% Advance)</a>
+      <p class="hero-note">Limited seats. Ends 20th November 2026.</p>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- QUICK BENEFITS       -->
+  <!-- ==================== -->
+  <section class="quick-benefits">
+    <div class="container">
+      <h2 class="text-center">Why Join This Course?</h2>
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">🎯</div>
+          <h3>Learn Market-Ready Skills</h3>
+          <p>Design and edit content that brands actually pay for.</p>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <span class="dot"></span>
-                    <span>Premium Multimedia Studio in The Gambia</span>
-                </div>
-                <h1>Creative Excellence Meets <span>Digital Innovation</span></h1>
-                <p>We craft compelling multimedia experiences that elevate Gambian businesses through cutting-edge video production, design, and digital solutions.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">
-                        Start Your Project
-                        <span>→</span>
-                    </a>
-                    <a href="#services" class="btn btn-secondary">
-                        Explore Services
-                    </a>
-                </div>
-            </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">📜</div>
+          <h3>Get Certified</h3>
+          <p>Receive an official certificate and transcript from BeGlitch.</p>
         </div>
-        <div class="hero-bg">
-            <div class="floating-shape shape-1"></div>
-            <div class="floating-shape shape-2"></div>
-            <div class="floating-shape shape-3"></div>
+        <div class="benefit-card">
+          <div class="benefit-icon">🚀</div>
+          <h3>Start Small, Grow Fast</h3>
+          <p>No experience needed. Just a laptop and willingness to learn.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-label">What We Do</span>
-                <h2 class="section-title">Comprehensive Multimedia Solutions</h2>
-                <p class="section-subtitle">From concept to execution, we deliver professional-grade creative services tailored for the Gambian market.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card fade-in">
-                    <div class="service-icon">🎬</div>
-                    <h3>Video Production</h3>
-                    <p>Cinematic storytelling, professional editing, motion graphics, and commercial video production for brands and events across The Gambia.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🎨</div>
-                    <h3>Graphic Design</h3>
-                    <p>Brand identity, logo design, marketing materials, and digital assets that capture attention and communicate your message effectively.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🎵</div>
-                    <h3>Audio Production</h3>
-                    <p>Professional sound design, music production, audio editing, and podcast post-production for artists and content creators.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">💻</div>
-                    <h3>Web Development</h3>
-                    <p>Modern, responsive websites and digital platforms built with React and modern frameworks to establish your online presence.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">📱</div>
-                    <h3>Social Media Content</h3>
-                    <p>Engaging multimedia content optimized for Instagram, Facebook, TikTok, and LinkedIn to maximize your digital reach.</p>
-                </div>
-                <div class="service-card fade-in">
-                    <div class="service-icon">🚀</div>
-                    <h3>Digital Strategy</h3>
-                    <p>Strategic consulting on brand positioning, content marketing, and digital growth tailored for Gambian businesses.</p>
-                </div>
-            </div>
+  <!-- ==================== -->
+  <!-- WHAT YOU'LL LEARN    -->
+  <!-- ==================== -->
+  <section class="what-you-learn">
+    <div class="container">
+      <h2 class="text-center">What You'll Learn in 3 Months</h2>
+      <div class="learn-grid">
+        <div class="learn-card">
+          <h3>Graphic Design Basics</h3>
+          <p>Layout, typography, colour, branding.</p>
         </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item fade-in">
-                    <h3>150+</h3>
-                    <p>Projects Delivered</p>
-                </div>
-                <div class="stat-item fade-in">
-                    <h3>80+</h3>
-                    <p>Happy Clients</p>
-                </div>
-                <div class="stat-item fade-in">
-                    <h3>5+</h3>
-                    <p>Years Experience</p>
-                </div>
-                <div class="stat-item fade-in">
-                    <h3>100%</h3>
-                    <p>Client Satisfaction</p>
-                </div>
-            </div>
+        <div class="learn-card">
+          <h3>Industry Tools</h3>
+          <p>Hands-on with professional design software.</p>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text fade-in">
-                    <span class="section-label">About BeGlitch</span>
-                    <h2>Empowering Gambian Businesses Through Creative Technology</h2>
-                    <p>BeGlitch is a forward-thinking multimedia company based in Serekunda, dedicated to bridging the gap between traditional Gambian business values and modern digital innovation.</p>
-                    <p>We combine international quality standards with local market understanding to deliver multimedia solutions that resonate with Gambian audiences while maintaining global competitiveness.</p>
-                    <div class="about-features">
-                        <div class="about-feature">
-                            <div class="check">✓</div>
-                            <span>Local Market Expertise</span>
-                        </div>
-                        <div class="about-feature">
-                            <div class="check">✓</div>
-                            <span>International Standards</span>
-                        </div>
-                        <div class="about-feature">
-                            <div class="check">✓</div>
-                            <span>End-to-End Solutions</span>
-                        </div>
-                        <div class="about-feature">
-                            <div class="check">✓</div>
-                            <span>Fast Turnaround</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-visual fade-in">
-                    <div class="about-card">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 20px; position: relative; z-index: 2;">Our Tech Stack</h3>
-                        <p style="color: rgba(255,255,255,0.6); margin-bottom: 30px; position: relative; z-index: 2;">We use industry-leading tools and frameworks to deliver exceptional results.</p>
-                        <div class="tech-stack">
-                            <span class="tech-badge">Adobe Creative Suite</span>
-                            <span class="tech-badge">React.js</span>
-                            <span class="tech-badge">After Effects</span>
-                            <span class="tech-badge">Premiere Pro</span>
-                            <span class="tech-badge">Figma</span>
-                            <span class="tech-badge">Blender</span>
-                            <span class="tech-badge">Pro Tools</span>
-                            <span class="tech-badge">Node.js</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="learn-card">
+          <h3>Video Editing Fundamentals</h3>
+          <p>Cut, transition, title, and simple effects.</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="section-header fade-in">
-                    <span class="section-label">Get In Touch</span>
-                    <h2 class="section-title">Ready to Transform Your Brand?</h2>
-                    <p class="section-subtitle">Let's discuss your project and create something extraordinary together.</p>
-                </div>
-                <div class="contact-box fade-in">
-                    <div class="contact-methods">
-                        <div class="contact-method">
-                            <div class="icon">📧</div>
-                            <h4>Email</h4>
-                            <p>hello@beglitch.gm</p>
-                        </div>
-                        <div class="contact-method">
-                            <div class="icon">📱</div>
-                            <h4>Phone</h4>
-                            <p>+220 XXX XXXX</p>
-                        </div>
-                        <div class="contact-method">
-                            <div class="icon">📍</div>
-                            <h4>Location</h4>
-                            <p>Serekunda, Gambia</p>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary" onclick="showContactModal()">
-                        Schedule a Consultation
-                        <span>→</span>
-                    </button>
-                </div>
-            </div>
+        <div class="learn-card">
+          <h3>Social Media Content</h3>
+          <p>Posts, stories, reels that get attention.</p>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="nav-logo">BeGlitch</div>
-                    <p>Premium multimedia solutions empowering Gambian businesses through creative excellence and digital innovation.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#">Video Production</a></li>
-                        <li><a href="#">Graphic Design</a></li>
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">Audio Production</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4>Connect</h4>
-                    <ul>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Twitter</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 BeGlitch Multimedia. All rights reserved. Made with ❤️ in The Gambia</p>
-                <div class="social-links">
-                    <a href="#">IG</a>
-                    <a href="#">FB</a>
-                    <a href="#">LI</a>
-                    <a href="#">TW</a>
-                </div>
-            </div>
+        <div class="learn-card">
+          <h3>Real Projects</h3>
+          <p>Build a portfolio you can show clients.</p>
         </div>
-    </footer>
+        <div class="learn-card">
+          <h3>Freelance Tips</h3>
+          <p>Find clients, price your work, get paid.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+  <!-- ==================== -->
+  <!-- CREDIBILITY          -->
+  <!-- ==================== -->
+  <section class="credibility">
+    <div class="container text-center">
+      <h2>First Batch – Limited Seats</h2>
+      <p style="max-width: 700px; margin: 1rem auto 0;">This is the <strong>first intake</strong> of BeGlitch teaching sessions. Only a small group will be accepted to ensure quality training and individual attention.</p>
+      <ul class="credibility-list" style="text-align: left; display: inline-block;">
+        <li>Official <strong>certificate of completion</strong> from BeGlitch</li>
+        <li><strong>Transcript</strong> showing modules and projects</li>
+      </ul>
+    </div>
+  </section>
 
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  <!-- ==================== -->
+  <!-- REQUIREMENTS         -->
+  <!-- ==================== -->
+  <section class="requirements">
+    <div class="container text-center">
+      <h2>Who Should Apply?</h2>
+      <ul class="requirements-list" style="text-align: left; display: inline-block;">
+        <li>Basic computer knowledge (mouse, keyboard, files)</li>
+        <li>Able to read and write in English</li>
+        <li>Access to a laptop (Windows or Mac)</li>
+        <li>Willing to complete weekly projects</li>
+        <li>No prior design or editing experience needed</li>
+      </ul>
+      <p class="requirements-note">If you meet these requirements, you're ready to enrol.</p>
+    </div>
+  </section>
 
-        // Contact modal
-        function showContactModal() {
-            alert('🎉 Thank you for your interest in BeGlitch!\n\nTo schedule a consultation:\n\n📧 Email: hello@beglitch.gm\n📱 Phone: +220 XXX XXXX\n\nWe typically respond within 24 hours and look forward to bringing your vision to life!');
-        }
+  <!-- ==================== -->
+  <!-- SCHEDULE & PRICING   -->
+  <!-- ==================== -->
+  <section class="schedule-pricing">
+    <div class="container">
+      <h2 class="text-center">Course Details & Fees</h2>
+      <div class="sp-grid">
+        <div class="sp-card">
+          <h3>Schedule</h3>
+          <ul>
+            <li><strong>Start:</strong> 1st September 2026</li>
+            <li><strong>End:</strong> 20th November 2026</li>
+            <li><strong>Duration:</strong> 3 months</li>
+            <li><strong>Batch:</strong> First intake of BeGlitch teaching sessions</li>
+          </ul>
+        </div>
+        <div class="sp-card">
+          <h3>Pricing</h3>
+          <ul>
+            <li><strong>Total fee:</strong> D4,000.00</li>
+            <li><strong>Advance payment:</strong> 50% (D2,000.00) to secure your slot</li>
+            <li><strong>Balance:</strong> D2,000.00</li>
+          </ul>
+        </div>
+      </div>
+      <p class="sp-note">Seats are limited. Enrol early to avoid missing out.</p>
+    </div>
+  </section>
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+  <!-- ==================== -->
+  <!-- ENROLMENT FORM       -->
+  <!-- ==================== -->
+  <section class="enrolment" id="enrolment">
+    <div class="container text-center">
+      <h2>Reserve Your Slot Now</h2>
+      <p class="form-note">Complete this form to enrol. We'll contact you with payment details within 24 hours.</p>
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+      <div class="form-container">
+        <form id="enrolmentForm">
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="fullName" required />
+          </div>
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" required />
+          </div>
 
-        // Service card hover effects
-        document.querySelectorAll('.service-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
+          <div class="form-group">
+            <label for="phone">Phone / WhatsApp *</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
 
-        // Dynamic stat counter animation
-        function animateStats() {
-            const stats = document.querySelectorAll('.stat-item h3');
-            stats.forEach(stat => {
-                const target = stat.innerText;
-                const isPercentage = target.includes('%');
-                const isPlus = target.includes('+');
-                const num = parseInt(target.replace(/[^0-9]/g, ''));
-                
-                let current = 0;
-                const increment = num / 50;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= num) {
-                        current = num;
-                        clearInterval(timer);
-                    }
-                    stat.innerText = Math.floor(current) + (isPlus ? '+' : '') + (isPercentage ? '%' : '');
-                }, 30);
-            });
-        }
+          <div class="form-group">
+            <label for="location">Location *</label>
+            <select id="location" name="location" required>
+              <option value="">Select...</option>
+              <option value="Serekunda">Serekunda</option>
+              <option value="Banjul">Banjul</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
 
-        // Trigger stats animation when visible
-        const statsObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+          <div class="form-group">
+            <label for="status">Current Status *</label>
+            <select id="status" name="status" required>
+              <option value="">Select...</option>
+              <option value="Student">Student</option>
+              <option value="Employed">Employed</option>
+              <option value="Self-employed">Self-employed</option>
+              <option value="Unemployed">Unemployed</option>
+            </select>
+          </div>
 
-        document.querySelectorAll('.stats').forEach(el => {
-            statsObserver.observe(el);
-        });
+          <div class="form-group">
+            <label for="laptop">Laptop Type *</label>
+            <select id="laptop" name="laptop" required>
+              <option value="">Select...</option>
+              <option value="Windows">Windows</option>
+              <option value="Mac">Mac</option>
+              <option value="Other">Other</option>
+              <option value="Need advice">I need advice</option>
+            </select>
+          </div>
 
-        // Parallax effect for floating shapes
-        window.addEventListener('scroll', function() {
-            const scrolled = window.scrollY;
-            const shapes = document.querySelectorAll('.floating-shape');
-            shapes.forEach((shape, index) => {
-                const speed = (index + 1) * 0.1;
-                shape.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
+          <div class="form-group">
+            <label for="source">How did you hear about this? (optional)</label>
+            <select id="source" name="source">
+              <option value="">Select...</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Instagram">Instagram</option>
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Friend">Friend / Family</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
 
-        console.log('BeGlitch | Premium Multimedia Solutions - The Gambia');
-        console.log('Built with modern web technologies for optimal performance');
-    </script>
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="consent" name="consent" required />
+            <label for="consent">I agree to be contacted about my enrolment. *</label>
+          </div>
+
+          <button type="submit" class="btn btn-large form-submit">Enrol Now – Pay D2,000 Advance</button>
+        </form>
+
+        <div class="success-message" id="successMessage">
+          <h3>Thanks! Your enrolment has been received.</h3>
+          <p>We'll contact you within 24 hours with payment details and next steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- FAQ (OPTIONAL)       -->
+  <!-- ==================== -->
+  <section class="faq">
+    <div class="container">
+      <h2 class="text-center">Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <p class="faq-question">Do I need prior experience?</p>
+          <p>No. This course is designed for beginners.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-question">What if I don't have a laptop?</p>
+          <p>You'll need access to a laptop to complete the course.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-question">Will I get a certificate?</p>
+          <p>Yes. You'll receive a certificate and transcript at the end.</p>
+        </div>
+        <div class="faq-item">
+          <p class="faq-question">How many seats are available?</p>
+          <p>Limited. This is the first batch, and we're keeping the group small.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- FINAL CTA            -->
+  <!-- ==================== -->
+  <section class="final-cta">
+    <div class="container final-cta-content">
+      <h2>Ready to Start Your Creative Journey?</h2>
+      <p>First batch starts 1st September. Limited seats available.</p>
+      <a href="#enrolment" class="btn btn-large">Enrol Now – D4,000 (50% Advance)</a>
+    </div>
+  </section>
+
+  <!-- ==================== -->
+  <!-- FOOTER               -->
+  <!-- ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h2>Be<span>Glitch</span></h2>
+          <p class="footer-tagline">Visuals beyond reality</p>
+          <div class="footer-contact">
+            <p><strong>Email:</strong> [your-email@beglitch.com]</p>
+            <p><strong>Phone / WhatsApp:</strong> [+220 XXX XXXX]</p>
+          </div>
+          <div class="social-links">
+            <!-- Social placeholders - replace href with actual links -->
+            <a href="#" target="_blank" rel="noopener" title="Facebook">F</a>
+            <a href="#" target="_blank" rel="noopener" title="Instagram">I</a>
+            <a href="#" target="_blank" rel="noopener" title="Twitter / X">X</a>
+            <a href="#" target="_blank" rel="noopener" title="LinkedIn">In</a>
+          </div>
+        </div>
+        <div class="footer-contact">
+          <h3 style="margin-bottom: 1rem;">Contact Us</h3>
+          <p>Have questions? Reach out to us:</p>
+          <p><strong>Email:</strong> [your-email@beglitch.com]</p>
+          <p><strong>Phone / WhatsApp:</strong> [+220 XXX XXXX]</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 BeGlitch. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== -->
+  <!-- STICKY MOBILE CTA    -->
+  <!-- ==================== -->
+  <div class="sticky-cta">
+    <a href="#enrolment" class="btn btn-large">Enrol Now – D2,000 Advance</a>
+  </div>
+
+  <!-- ==================== -->
+  <!-- JAVASCRIPT           -->
+  <!-- ==================== -->
+  <script>
+    // Form submission handler
+    document.getElementById('enrolmentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Basic validation (HTML5 required handles most)
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      // Here you would normally send data to your backend
+      // For now, we'll just show success message
+      console.log('Enrolment data:', data);
+
+      // Hide form, show success message
+      document.getElementById('enrolmentForm').style.display = 'none';
+      document.getElementById('successMessage').style.display = 'block';
+
+      // Optional: Scroll to success message
+      document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    // Optional: Track form abandonment (for analytics later)
+    let formTouched = false;
+    const formFields = document.querySelectorAll('#enrolmentForm input, #enrolmentForm select');
+    formFields.forEach(field => {
+      field.addEventListener('input', () => {
+        formTouched = true;
+      });
+    });
+
+    window.addEventListener('beforeunload', function(e) {
+      if (formTouched) {
+        // You could send this to analytics
+        console.log('User started but did not complete form');
+      }
+    });
+  </script>
 </body>
 </html>
