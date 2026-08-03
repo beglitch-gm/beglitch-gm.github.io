@@ -6,10 +6,10 @@
   <title>BeGlitch – 3-Month Multimedia Training | Enrol Now</title>
   <meta name="description" content="Join BeGlitch's first multimedia training batch. Learn graphic design, video editing, and creative skills in 3 months. Starts 1st September 2026. Enrol now." />
 
-  <!-- Google Fonts: Montserrat (note: you mentioned "monsterat" - assuming Montserrat) -->
+  <!-- Google Fonts: Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ==================== */
@@ -20,6 +20,12 @@
       --color-bg-secondary: #323232;
       --color-text-light: #ffe7d0;
       --color-accent: #fc6e20;
+      --color-accent-glow: rgba(252, 110, 32, 0.35);
+      --gradient-primary: linear-gradient(135deg, #fc6e20 0%, #ff8c42 100%);
+      --gradient-bg: linear-gradient(180deg, #181818 0%, #1f1f1f 100%);
+      --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.4);
+      --shadow-accent: 0 8px 30px var(--color-accent-glow);
+      --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       --font-main: 'Montserrat', sans-serif;
     }
 
@@ -38,14 +44,16 @@
 
     body {
       font-family: var(--font-main);
-      background-color: var(--color-bg-dark);
+      background: var(--gradient-bg);
       color: var(--color-text-light);
-      line-height: 1.6;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
 
     a {
       text-decoration: none;
       color: inherit;
+      transition: var(--transition-smooth);
     }
 
     ul {
@@ -64,17 +72,21 @@
       font-weight: 700;
       line-height: 1.2;
       margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
     }
 
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 2rem; }
+    h1 { 
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+    h2 { font-size: 2.2rem; }
     h3 { font-size: 1.5rem; }
     p { margin-bottom: 1rem; }
 
     @media (max-width: 768px) {
-      h1 { font-size: 2rem; }
-      h2 { font-size: 1.75rem; }
-      h3 { font-size: 1.25rem; }
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.8rem; }
+      h3 { font-size: 1.3rem; }
     }
 
     /* ==================== */
@@ -88,12 +100,13 @@
     }
 
     section {
-      padding: 4rem 0;
+      padding: 5.5rem 0;
+      position: relative;
     }
 
     @media (max-width: 768px) {
       section {
-        padding: 3rem 0;
+        padding: 4rem 0;
       }
     }
 
@@ -101,28 +114,72 @@
     .text-accent { color: var(--color-accent); }
 
     /* ==================== */
+    /* ANIMATIONS           */
+    /* ==================== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    /* ==================== */
     /* BUTTONS              */
     /* ==================== */
     .btn {
       display: inline-block;
-      background-color: var(--color-accent);
-      color: var(--color-bg-dark);
+      background: var(--gradient-primary);
+      color: #181818;
       font-weight: 700;
-      padding: 0.9rem 2rem;
-      border-radius: 6px;
+      padding: 1rem 2.2rem;
+      border-radius: 50px;
       border: none;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: var(--transition-smooth);
       font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-accent);
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(252, 110, 32, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(252, 110, 32, 0.5);
+    }
+
+    .btn:hover::before {
+      left: 100%;
     }
 
     .btn-large {
-      padding: 1.1rem 2.5rem;
+      padding: 1.2rem 2.8rem;
       font-size: 1.1rem;
     }
 
@@ -130,12 +187,20 @@
     /* HEADER               */
     /* ==================== */
     header {
-      background-color: var(--color-bg-dark);
-      padding: 1rem 0;
+      background: rgba(24, 24, 24, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 0;
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--color-bg-secondary);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: var(--transition-smooth);
+    }
+
+    header.scrolled {
+      padding: 0.9rem 0;
+      background: rgba(24, 24, 24, 0.98);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     }
 
     .header-content {
@@ -145,9 +210,10 @@
     }
 
     .logo {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       font-weight: 700;
       color: var(--color-text-light);
+      letter-spacing: -0.03em;
     }
 
     .logo span {
@@ -168,47 +234,80 @@
     /* HERO SECTION         */
     /* ==================== */
     .hero {
-      background-color: var(--color-bg-dark);
-      padding: 5rem 0 4rem;
+      background: radial-gradient(ellipse at 50% 0%, rgba(252, 110, 32, 0.15) 0%, transparent 70%);
+      padding: 7rem 0 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(252, 110, 32, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .hero-content {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-hero {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      letter-spacing: -0.03em;
+    }
+
+    .logo-hero span {
+      color: var(--color-accent);
     }
 
     .hero-tagline {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 400;
-      margin-bottom: 1rem;
-      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      opacity: 0.85;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .hero-subtitle {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      margin-bottom: 2.5rem;
       opacity: 0.95;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .hero-note {
-      font-size: 0.9rem;
-      margin-top: 1rem;
-      opacity: 0.8;
+      font-size: 0.95rem;
+      margin-top: 1.5rem;
+      opacity: 0.75;
     }
 
     /* ==================== */
     /* QUICK BENEFITS       */
     /* ==================== */
     .quick-benefits {
-      background-color: var(--color-bg-secondary);
+      background: linear-gradient(180deg, #1f1f1f 0%, #181818 100%);
     }
 
     .benefits-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 2rem;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
     }
 
     @media (min-width: 768px) {
@@ -218,27 +317,44 @@
     }
 
     .benefit-card {
+      background: rgba(50, 50, 50, 0.4);
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: var(--transition-smooth);
       text-align: center;
     }
 
+    .benefit-card:hover {
+      transform: translateY(-8px);
+      background: rgba(50, 50, 50, 0.6);
+      border-color: rgba(252, 110, 32, 0.3);
+      box-shadow: var(--shadow-accent);
+    }
+
     .benefit-icon {
-      font-size: 2.5rem;
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .benefit-card h3 {
       color: var(--color-accent);
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
     }
 
     /* ==================== */
     /* WHAT YOU'LL LEARN    */
     /* ==================== */
     .what-you-learn {
-      background-color: var(--color-bg-dark);
+      background: #181818;
     }
 
     .learn-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 1.5rem;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
     }
 
     @media (min-width: 600px) {
@@ -254,33 +370,74 @@
     }
 
     .learn-card {
-      background-color: var(--color-bg-secondary);
-      padding: 1.5rem;
-      border-radius: 8px;
-      border-left: 4px solid var(--color-accent);
+      background: linear-gradient(135deg, rgba(50, 50, 50, 0.5) 0%, rgba(50, 50, 50, 0.3) 100%);
+      padding: 1.8rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .learn-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-primary);
+    }
+
+    .learn-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(252, 110, 32, 0.35);
+      box-shadow: var(--shadow-accent);
     }
 
     .learn-card h3 {
       color: var(--color-accent);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
     }
 
     /* ==================== */
     /* CREDIBILITY          */
     /* ==================== */
     .credibility {
-      background-color: var(--color-bg-secondary);
+      background: linear-gradient(180deg, #181818 0%, #1f1f1f 100%);
+      position: relative;
+    }
+
+    .credibility::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(252, 110, 32, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .credibility-content {
+      position: relative;
+      z-index: 1;
     }
 
     .credibility-list {
       max-width: 700px;
       margin: 2rem auto 0;
+      display: inline-block;
+      text-align: left;
     }
 
     .credibility-list li {
-      margin-bottom: 0.75rem;
-      padding-left: 1.5rem;
+      margin-bottom: 0.9rem;
+      padding-left: 1.8rem;
       position: relative;
+      font-size: 1.05rem;
     }
 
     .credibility-list li::before {
@@ -289,24 +446,28 @@
       left: 0;
       color: var(--color-accent);
       font-weight: 700;
+      font-size: 1.2rem;
     }
 
     /* ==================== */
     /* REQUIREMENTS         */
     /* ==================== */
     .requirements {
-      background-color: var(--color-bg-dark);
+      background: #181818;
     }
 
     .requirements-list {
       max-width: 700px;
       margin: 2rem auto 0;
+      display: inline-block;
+      text-align: left;
     }
 
     .requirements-list li {
-      margin-bottom: 0.75rem;
-      padding-left: 1.5rem;
+      margin-bottom: 0.9rem;
+      padding-left: 1.8rem;
       position: relative;
+      font-size: 1.05rem;
     }
 
     .requirements-list li::before {
@@ -315,14 +476,14 @@
       left: 0;
       color: var(--color-accent);
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
     }
 
     .requirements-note {
       max-width: 700px;
       margin: 1.5rem auto 0;
       text-align: center;
-      font-size: 0.95rem;
+      font-size: 1rem;
       opacity: 0.9;
     }
 
@@ -330,14 +491,14 @@
     /* SCHEDULE & PRICING   */
     /* ==================== */
     .schedule-pricing {
-      background-color: var(--color-bg-secondary);
+      background: linear-gradient(180deg, #1f1f1f 0%, #181818 100%);
     }
 
     .sp-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 2rem;
-      margin-top: 2rem;
+      margin-top: 2.5rem;
     }
 
     @media (min-width: 768px) {
@@ -347,24 +508,33 @@
     }
 
     .sp-card {
-      background-color: var(--color-bg-dark);
-      padding: 2rem;
-      border-radius: 8px;
+      background: rgba(50, 50, 50, 0.4);
+      padding: 2.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: var(--transition-smooth);
+    }
+
+    .sp-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(252, 110, 32, 0.3);
+      box-shadow: var(--shadow-accent);
     }
 
     .sp-card h3 {
       color: var(--color-accent);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .sp-card ul li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.05rem;
     }
 
     .sp-note {
       text-align: center;
-      margin-top: 2rem;
-      font-size: 0.95rem;
+      margin-top: 2.5rem;
+      font-size: 1rem;
       opacity: 0.9;
     }
 
@@ -372,39 +542,59 @@
     /* ENROLMENT FORM       */
     /* ==================== */
     .enrolment {
-      background-color: var(--color-bg-dark);
+      background: #181818;
+      position: relative;
+    }
+
+    .enrolment::before {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(252, 110, 32, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
 
     .form-container {
-      max-width: 650px;
-      margin: 2rem auto 0;
-      background-color: var(--color-bg-secondary);
-      padding: 2.5rem 2rem;
-      border-radius: 10px;
+      max-width: 680px;
+      margin: 2.5rem auto 0;
+      background: rgba(50, 50, 50, 0.5);
+      padding: 3rem 2.5rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      z-index: 1;
     }
 
     .form-group {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.6rem;
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
+      margin-bottom: 0.6rem;
+      font-weight: 600;
       font-size: 0.95rem;
+      color: var(--color-text-light);
     }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 0.85rem;
-      background-color: var(--color-bg-dark);
-      border: 1px solid #444;
-      border-radius: 6px;
+      padding: 0.95rem 1.2rem;
+      background: rgba(24, 24, 24, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
       color: var(--color-text-light);
       font-family: var(--font-main);
       font-size: 1rem;
+      transition: var(--transition-smooth);
     }
 
     .form-group input:focus,
@@ -412,95 +602,119 @@
     .form-group textarea:focus {
       outline: none;
       border-color: var(--color-accent);
+      box-shadow: 0 0 0 4px rgba(252, 110, 32, 0.15);
+      background: rgba(24, 24, 24, 0.9);
     }
 
     .checkbox-group {
       display: flex;
       align-items: flex-start;
-      gap: 0.75rem;
+      gap: 0.9rem;
     }
 
     .checkbox-group input {
-      width: auto;
-      margin-top: 0.25rem;
+      width: 20px;
+      height: 20px;
+      margin-top: 0.2rem;
+      cursor: pointer;
+      accent-color: var(--color-accent);
     }
 
     .checkbox-group label {
       margin-bottom: 0;
       font-weight: 400;
-      font-size: 0.9rem;
+      font-size: 0.93rem;
+      cursor: pointer;
     }
 
     .form-submit {
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
     }
 
     .form-note {
       text-align: center;
-      margin-top: 1rem;
-      font-size: 0.9rem;
+      margin-top: 1.2rem;
+      font-size: 0.93rem;
       opacity: 0.85;
     }
 
     .success-message {
       display: none;
-      background-color: #1a472a;
+      background: linear-gradient(135deg, rgba(26, 71, 42, 0.9) 0%, rgba(32, 90, 54, 0.9) 100%);
       color: #d4edda;
-      padding: 1.5rem;
-      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
       margin-top: 2rem;
       text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .success-message h3 {
+      margin-bottom: 0.75rem;
     }
 
     /* ==================== */
     /* FAQ                  */
     /* ==================== */
     .faq {
-      background-color: var(--color-bg-secondary);
+      background: linear-gradient(180deg, #181818 0%, #1f1f1f 100%);
     }
 
     .faq-list {
       max-width: 800px;
-      margin: 2rem auto 0;
+      margin: 2.5rem auto 0;
     }
 
     .faq-item {
-      margin-bottom: 1.5rem;
+      background: rgba(50, 50, 50, 0.4);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: var(--transition-smooth);
+    }
+
+    .faq-item:hover {
+      border-color: rgba(252, 110, 32, 0.25);
+      background: rgba(50, 50, 50, 0.6);
     }
 
     .faq-question {
       font-weight: 700;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       color: var(--color-accent);
+      font-size: 1.05rem;
     }
 
     /* ==================== */
     /* FINAL CTA            */
     /* ==================== */
     .final-cta {
-      background-color: var(--color-bg-dark);
+      background: radial-gradient(ellipse at 50% 0%, rgba(252, 110, 32, 0.12) 0%, transparent 70%);
       text-align: center;
     }
 
     .final-cta-content {
       max-width: 700px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     /* ==================== */
     /* FOOTER               */
     /* ==================== */
     footer {
-      background-color: var(--color-bg-secondary);
-      padding: 3rem 0 2rem;
-      border-top: 1px solid #444;
+      background: linear-gradient(180deg, #1f1f1f 0%, #181818 100%);
+      padding: 4rem 0 2.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .footer-content {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     @media (min-width: 768px) {
@@ -510,52 +724,60 @@
     }
 
     .footer-brand h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.03em;
     }
 
     .footer-tagline {
       font-size: 0.95rem;
       opacity: 0.9;
       margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .footer-contact p {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
+      font-size: 1rem;
     }
 
     .social-links {
       display: flex;
       gap: 1rem;
-      margin-top: 1.5rem;
+      margin-top: 1.8rem;
     }
 
     .social-links a {
-      display: inline-block;
-      background-color: var(--color-bg-dark);
-      color: var(--color-text-light);
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
-      transition: background-color 0.2s ease;
+      width: 48px;
+      height: 48px;
+      background: rgba(50, 50, 50, 0.6);
+      color: var(--color-text-light);
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 700;
+      transition: var(--transition-smooth);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .social-links a:hover {
-      background-color: var(--color-accent);
-      color: var(--color-bg-dark);
+      background: var(--gradient-primary);
+      color: #181818;
+      border-color: transparent;
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-accent);
     }
 
     .footer-bottom {
       text-align: center;
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #444;
+      margin-top: 3.5rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 0.9rem;
-      opacity: 0.8;
+      opacity: 0.75;
     }
 
     /* ==================== */
@@ -566,12 +788,13 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: var(--color-bg-secondary);
-      padding: 1rem;
+      background: linear-gradient(180deg, rgba(24, 24, 24, 0.95) 0%, rgba(50, 50, 50, 0.95) 100%);
+      padding: 1.2rem 1rem;
       text-align: center;
       z-index: 999;
       display: block;
-      border-top: 1px solid #444;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
     }
 
     .sticky-cta .btn {
@@ -584,6 +807,16 @@
         display: none;
       }
     }
+
+    /* ==================== */
+    /* SECTION DIVIDERS     */
+    /* ==================== */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
+      margin: 0 auto;
+      max-width: 300px;
+    }
   </style>
 </head>
 <body>
@@ -591,7 +824,7 @@
   <!-- ==================== -->
   <!-- HEADER               -->
   <!-- ==================== -->
-  <header>
+  <header id="header">
     <div class="container header-content">
       <div class="logo">Be<span>Glitch</span></div>
       <a href="#enrolment" class="btn header-cta">Enrol Now</a>
@@ -602,8 +835,8 @@
   <!-- HERO                 -->
   <!-- ==================== -->
   <section class="hero">
-    <div class="container hero-content">
-      <div class="logo" style="margin-bottom: 0.5rem;">Be<span>Glitch</span></div>
+    <div class="container hero-content animate-on-scroll">
+      <div class="logo-hero">Be<span>Glitch</span></div>
       <p class="hero-tagline">Visuals beyond reality</p>
       <h1>3 Months to a Creative Career in The Gambia</h1>
       <p class="hero-subtitle">Graphic design. Video editing. Real skills. First batch starts 1st September 2026.</p>
@@ -617,20 +850,21 @@
   <!-- ==================== -->
   <section class="quick-benefits">
     <div class="container">
-      <h2 class="text-center">Why Join This Course?</h2>
+      <h2 class="text-center animate-on-scroll">Why Join This Course?</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
       <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">🎯</div>
+        <div class="benefit-card animate-on-scroll">
+          <span class="benefit-icon">🎯</span>
           <h3>Learn Market-Ready Skills</h3>
           <p>Design and edit content that brands actually pay for.</p>
         </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">📜</div>
+        <div class="benefit-card animate-on-scroll">
+          <span class="benefit-icon">📜</span>
           <h3>Get Certified</h3>
           <p>Receive an official certificate and transcript from BeGlitch.</p>
         </div>
-        <div class="benefit-card">
-          <div class="benefit-icon">🚀</div>
+        <div class="benefit-card animate-on-scroll">
+          <span class="benefit-icon">🚀</span>
           <h3>Start Small, Grow Fast</h3>
           <p>No experience needed. Just a laptop and willingness to learn.</p>
         </div>
@@ -643,29 +877,30 @@
   <!-- ==================== -->
   <section class="what-you-learn">
     <div class="container">
-      <h2 class="text-center">What You'll Learn in 3 Months</h2>
+      <h2 class="text-center animate-on-scroll">What You'll Learn in 3 Months</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
       <div class="learn-grid">
-        <div class="learn-card">
+        <div class="learn-card animate-on-scroll">
           <h3>Graphic Design Basics</h3>
           <p>Layout, typography, colour, branding.</p>
         </div>
-        <div class="learn-card">
+        <div class="learn-card animate-on-scroll">
           <h3>Industry Tools</h3>
           <p>Hands-on with professional design software.</p>
         </div>
-        <div class="learn-card">
+        <div class="learn-card animate-on-scroll">
           <h3>Video Editing Fundamentals</h3>
           <p>Cut, transition, title, and simple effects.</p>
         </div>
-        <div class="learn-card">
+        <div class="learn-card animate-on-scroll">
           <h3>Social Media Content</h3>
           <p>Posts, stories, reels that get attention.</p>
         </div>
-        <div class="learn-card">
+        <div class="learn-card animate-on-scroll">
           <h3>Real Projects</h3>
           <p>Build a portfolio you can show clients.</p>
         </div>
-        <div class="learn-card">
+        <div class="learn-card animate-on-scroll">
           <h3>Freelance Tips</h3>
           <p>Find clients, price your work, get paid.</p>
         </div>
@@ -677,10 +912,11 @@
   <!-- CREDIBILITY          -->
   <!-- ==================== -->
   <section class="credibility">
-    <div class="container text-center">
-      <h2>First Batch – Limited Seats</h2>
-      <p style="max-width: 700px; margin: 1rem auto 0;">This is the <strong>first intake</strong> of BeGlitch teaching sessions. Only a small group will be accepted to ensure quality training and individual attention.</p>
-      <ul class="credibility-list" style="text-align: left; display: inline-block;">
+    <div class="container credibility-content text-center">
+      <h2 class="animate-on-scroll">First Batch – Limited Seats</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
+      <p style="max-width: 700px; margin: 1.5rem auto 0;" class="animate-on-scroll">This is the <strong>first intake</strong> of BeGlitch teaching sessions. Only a small group will be accepted to ensure quality training and individual attention.</p>
+      <ul class="credibility-list animate-on-scroll">
         <li>Official <strong>certificate of completion</strong> from BeGlitch</li>
         <li><strong>Transcript</strong> showing modules and projects</li>
       </ul>
@@ -692,15 +928,16 @@
   <!-- ==================== -->
   <section class="requirements">
     <div class="container text-center">
-      <h2>Who Should Apply?</h2>
-      <ul class="requirements-list" style="text-align: left; display: inline-block;">
+      <h2 class="animate-on-scroll">Who Should Apply?</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
+      <ul class="requirements-list animate-on-scroll">
         <li>Basic computer knowledge (mouse, keyboard, files)</li>
         <li>Able to read and write in English</li>
         <li>Access to a laptop (Windows or Mac)</li>
         <li>Willing to complete weekly projects</li>
         <li>No prior design or editing experience needed</li>
       </ul>
-      <p class="requirements-note">If you meet these requirements, you're ready to enrol.</p>
+      <p class="requirements-note animate-on-scroll">If you meet these requirements, you're ready to enrol.</p>
     </div>
   </section>
 
@@ -709,9 +946,10 @@
   <!-- ==================== -->
   <section class="schedule-pricing">
     <div class="container">
-      <h2 class="text-center">Course Details & Fees</h2>
+      <h2 class="text-center animate-on-scroll">Course Details & Fees</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
       <div class="sp-grid">
-        <div class="sp-card">
+        <div class="sp-card animate-on-scroll">
           <h3>Schedule</h3>
           <ul>
             <li><strong>Start:</strong> 1st September 2026</li>
@@ -720,7 +958,7 @@
             <li><strong>Batch:</strong> First intake of BeGlitch teaching sessions</li>
           </ul>
         </div>
-        <div class="sp-card">
+        <div class="sp-card animate-on-scroll">
           <h3>Pricing</h3>
           <ul>
             <li><strong>Total fee:</strong> D4,000.00</li>
@@ -729,7 +967,7 @@
           </ul>
         </div>
       </div>
-      <p class="sp-note">Seats are limited. Enrol early to avoid missing out.</p>
+      <p class="sp-note animate-on-scroll">Seats are limited. Enrol early to avoid missing out.</p>
     </div>
   </section>
 
@@ -738,24 +976,24 @@
   <!-- ==================== -->
   <section class="enrolment" id="enrolment">
     <div class="container text-center">
-      <h2>Reserve Your Slot Now</h2>
-      <p class="form-note">Complete this form to enrol. We'll contact you with payment details within 24 hours.</p>
+      <h2 class="animate-on-scroll">Reserve Your Slot Now</h2>
+      <p class="form-note animate-on-scroll">Complete this form to enrol. We'll contact you with payment details within 24 hours.</p>
 
-      <div class="form-container">
+      <div class="form-container animate-on-scroll">
         <form id="enrolmentForm">
           <div class="form-group">
             <label for="fullName">Full Name *</label>
-            <input type="text" id="fullName" name="fullName" required />
+            <input type="text" id="fullName" name="fullName" required placeholder="Enter your full name" />
           </div>
 
           <div class="form-group">
             <label for="email">Email *</label>
-            <input type="email" id="email" name="email" required />
+            <input type="email" id="email" name="email" required placeholder="your@email.com" />
           </div>
 
           <div class="form-group">
             <label for="phone">Phone / WhatsApp *</label>
-            <input type="tel" id="phone" name="phone" required />
+            <input type="tel" id="phone" name="phone" required placeholder="+220 XXX XXXX" />
           </div>
 
           <div class="form-group">
@@ -823,21 +1061,22 @@
   <!-- ==================== -->
   <section class="faq">
     <div class="container">
-      <h2 class="text-center">Frequently Asked Questions</h2>
+      <h2 class="text-center animate-on-scroll">Frequently Asked Questions</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
       <div class="faq-list">
-        <div class="faq-item">
+        <div class="faq-item animate-on-scroll">
           <p class="faq-question">Do I need prior experience?</p>
           <p>No. This course is designed for beginners.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item animate-on-scroll">
           <p class="faq-question">What if I don't have a laptop?</p>
           <p>You'll need access to a laptop to complete the course.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item animate-on-scroll">
           <p class="faq-question">Will I get a certificate?</p>
           <p>Yes. You'll receive a certificate and transcript at the end.</p>
         </div>
-        <div class="faq-item">
+        <div class="faq-item animate-on-scroll">
           <p class="faq-question">How many seats are available?</p>
           <p>Limited. This is the first batch, and we're keeping the group small.</p>
         </div>
@@ -850,9 +1089,10 @@
   <!-- ==================== -->
   <section class="final-cta">
     <div class="container final-cta-content">
-      <h2>Ready to Start Your Creative Journey?</h2>
-      <p>First batch starts 1st September. Limited seats available.</p>
-      <a href="#enrolment" class="btn btn-large">Enrol Now – D4,000 (50% Advance)</a>
+      <h2 class="animate-on-scroll">Ready to Start Your Creative Journey?</h2>
+      <div class="section-divider animate-on-scroll" style="margin-top: 1rem;"></div>
+      <p class="animate-on-scroll">First batch starts 1st September. Limited seats available.</p>
+      <a href="#enrolment" class="btn btn-large animate-on-scroll" style="margin-top: 1.5rem;">Enrol Now – D4,000 (50% Advance)</a>
     </div>
   </section>
 
@@ -901,27 +1141,51 @@
   <!-- JAVASCRIPT           -->
   <!-- ==================== -->
   <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -80px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
     // Form submission handler
     document.getElementById('enrolmentForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // Basic validation (HTML5 required handles most)
       const formData = new FormData(this);
       const data = Object.fromEntries(formData.entries());
 
-      // Here you would normally send data to your backend
-      // For now, we'll just show success message
       console.log('Enrolment data:', data);
 
       // Hide form, show success message
       document.getElementById('enrolmentForm').style.display = 'none';
       document.getElementById('successMessage').style.display = 'block';
 
-      // Optional: Scroll to success message
       document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
-    // Optional: Track form abandonment (for analytics later)
+    // Form abandonment tracking (optional)
     let formTouched = false;
     const formFields = document.querySelectorAll('#enrolmentForm input, #enrolmentForm select');
     formFields.forEach(field => {
@@ -932,7 +1196,6 @@
 
     window.addEventListener('beforeunload', function(e) {
       if (formTouched) {
-        // You could send this to analytics
         console.log('User started but did not complete form');
       }
     });
